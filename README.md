@@ -1,4 +1,4 @@
-# Python Random Password Generator (RPG) 🔐
+# KeyForge 🔐
 
 [![Python](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -53,8 +53,8 @@ Modern, secure, and feature-rich password and passphrase generator with CLI and 
 ### Basic Installation
 
 ```bash
-git clone https://github.com/ismailtasdelen/Python-Random-Password-Generator.git
-cd Python-Random-Password-Generator
+git clone https://github.com/ismailtsdln/KeyForge.git
+cd KeyForge
 pip install -e .
 ```
 
