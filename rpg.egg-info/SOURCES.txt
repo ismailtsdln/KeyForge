@@ -1,0 +1,17 @@
+LICENSE
+README.md
+setup.py
+rpg.egg-info/PKG-INFO
+rpg.egg-info/SOURCES.txt
+rpg.egg-info/dependency_links.txt
+rpg.egg-info/entry_points.txt
+rpg.egg-info/not-zip-safe
+rpg.egg-info/requires.txt
+rpg.egg-info/top_level.txt
+source/__init__.py
+source/cli.py
+source/config.py
+source/rpg.py
+source/strength.py
+source/utils.py
+source/wordlist.py

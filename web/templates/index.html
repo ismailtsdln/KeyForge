@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG - Random Password Generator</title>
+    <meta name="description" content="Generate secure, cryptographically random passwords and passphrases">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🔐</span>
+                <h1>Random Password Generator</h1>
+            </div>
+            <p class="subtitle">Generate cryptographically secure passwords & passphrases</p>
+        </header>
+
+        <!-- Mode Selector -->
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="password" id="passwordModeBtn">
+                🔑 Password
+            </button>
+            <button class="mode-btn" data-mode="passphrase" id="passphraseModeBtn">
+                📝 Passphrase
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Password Mode -->
+            <div class="mode-panel active" id="passwordPanel">
+                <div class="output-section">
+                    <div class="password-display" id="passwordDisplay">
+                        <span class="placeholder">Click Generate</span>
+                    </div>
+                    <div class="output-actions">
+                        <button class="action-btn" id="copyBtn" title="Copy to clipboard">
+                            <span class="btn-icon">📋</span>
+                            <span class="btn-text">Copy</span>
+                        </button>
+                        <button class="action-btn" id="generateBtn">
+                            <span class="btn-icon">🎲</span>
+                            <span class="btn-text">Generate</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Strength Meter -->
+                <div class="strength-section" id="strengthSection" style="display: none;">
+                    <div class="strength-header">
+                        <span class="strength-label">Password Strength:</span>
+                        <span class="strength-value" id="strengthValue">-</span>
+                    </div>
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="strengthFill"></div>
+                    </div>
+                    <div class="strength-details" id="strengthDetails"></div>
+                </div>
+
+                <!-- Password Options -->
+                <div class="options-section">
+                    <h3>Options</h3>
+                    
+                    <div class="option-group">
+                        <label for="lengthSlider" class="option-label">
+                            <span>Length:</span>
+                            <span class="option-value" id="lengthValue">16</span>
+                        </label>
+                        <input type="range" id="lengthSlider" min="6" max="64" value="16" class="slider">
+                    </div>
+
+                    <div class="option-group">
+                        <label for="countSlider" class="option-label">
+                            <span>Count:</span>
+                            <span class="option-value" id="countValue">1</span>
+                        </label>
+                        <input type="range" id="countSlider" min="1" max="10" value="1" class="slider">
+                    </div>
+
+                    <div class="checkbox-grid">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="uppercaseCheck" checked>
+                            <span class="checkbox-text">Uppercase (A-Z)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="lowercaseCheck" checked>
+                            <span class="checkbox-text">Lowercase (a-z)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="digitsCheck" checked>
+                            <span class="checkbox-text">Digits (0-9)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="specialCheck" checked>
+                            <span class="checkbox-text">Special (!@#$...)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Passphrase Mode -->
+            <div class="mode-panel" id="passphrasePanel">
+                <div class="output-section">
+                    <div class="password-display passphrase-display" id="passphraseDisplay">
+                        <span class="placeholder">Click Generate</span>
+                    </div>
+                    <div class="output-actions">
+                        <button class="action-btn" id="copyPhraseBtn" title="Copy to clipboard">
+                            <span class="btn-icon">📋</span>
+                            <span class="btn-text">Copy</span>
+                        </button>
+                        <button class="action-btn" id="generatePhraseBtn">
+                            <span class="btn-icon">🎲</span>
+                            <span class="btn-text">Generate</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Passphrase Strength -->
+                <div class="strength-section" id="phraseStrengthSection" style="display: none;">
+                    <div class="strength-header">
+                        <span class="strength-label">Passphrase Strength:</span>
+                        <span class="strength-value" id="phraseStrengthValue">-</span>
+                    </div>
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="phraseStrengthFill"></div>
+                    </div>
+                    <div class="strength-details" id="phraseStrengthDetails"></div>
+                </div>
+
+                <!-- Passphrase Options -->
+                <div class="options-section">
+                    <h3>Options</h3>
+                    
+                    <div class="option-group">
+                        <label for="wordCountSlider" class="option-label">
+                            <span>Word Count:</span>
+                            <span class="option-value" id="wordCountValue">4</span>
+                        </label>
+                        <input type="range" id="wordCountSlider" min="3" max="8" value="4" class="slider">
+                    </div>
+
+                    <div class="option-group">
+                        <label for="separatorInput" class="option-label">
+                            <span>Separator:</span>
+                        </label>
+                        <input type="text" id="separatorInput" value="-" maxlength="3" class="text-input">
+                    </div>
+
+                    <div class="checkbox-grid">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="capitalizeCheck" checked>
+                            <span class="checkbox-text">Capitalize Words</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="addNumberCheck">
+                            <span class="checkbox-text">Add Number</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multiple Passwords Display -->
+            <div class="multiple-passwords" id="multiplePasswords" style="display: none;">
+                <h3>Generated Passwords</h3>
+                <div class="password-list" id="passwordList"></div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🔒 All passwords are generated locally in your browser using cryptographically secure methods.</p>
+            <p>Made with ❤️ by <a href="https://www.linkedin.com/in/ismailtasdelen" target="_blank">İsmail Taşdelen</a></p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-text" id="toastText"></span>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

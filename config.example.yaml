@@ -1,0 +1,70 @@
+# RPG Configuration File Example
+# Copy this file to 'config.yaml' and customize as needed
+
+# Default settings for password generation
+defaults:
+  length: 16
+  use_uppercase: true
+  use_lowercase: true
+  use_digits: true
+  use_special: true
+  passphrase_words: 4
+  passphrase_separator: "-"
+  passphrase_capitalize: true
+
+# Password templates for common use cases
+templates:
+  # Standard web password (most websites)
+  web:
+    length: 16
+    use_uppercase: true
+    use_lowercase: true
+    use_digits: true
+    use_special: true
+
+  # WiFi password (no special chars for compatibility)
+  wifi:
+    length: 24
+    use_uppercase: true
+    use_lowercase: true
+    use_digits: true
+    use_special: false
+
+  # PIN code (numbers only)
+  pin:
+    length: 6
+    use_uppercase: false
+    use_lowercase: false
+    use_digits: true
+    use_special: false
+    custom_chars: "0123456789"
+
+  # Memorable passphrase
+  memorable:
+    passphrase: true
+    word_count: 4
+    separator: "-"
+    capitalize: true
+    include_number: true
+
+  # Maximum security password
+  maximum:
+    length: 32
+    use_uppercase: true
+    use_lowercase: true
+    use_digits: true
+    use_special: true
+
+  # Database password (alphanumeric, long)
+  database:
+    length: 24
+    use_uppercase: true
+    use_lowercase: true
+    use_digits: true
+    use_special: false
+
+# Output settings
+output:
+  show_strength: true
+  use_colors: true
+  save_to_history: false  # Set to true to save password hashes to history

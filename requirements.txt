@@ -1,0 +1,24 @@
+# RPG - Random Password Generator
+# Production Dependencies
+
+# Core password generation (built-in: secrets, string, random)
+
+# CLI enhancements
+colorama>=0.4.6
+
+# Clipboard support
+pyperclip>=1.8.2
+
+# QR code generation
+qrcode[pil]>=7.4.2
+Pillow>=10.0.0
+
+# Configuration files
+PyYAML>=6.0.1
+
+# Web interface
+Flask>=3.0.0
+flask-cors>=4.0.0
+
+# Optional: For better YAML handling
+ruamel.yaml>=0.18.0
